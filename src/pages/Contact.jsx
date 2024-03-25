@@ -143,7 +143,7 @@ const Contact = () => {
 									<img
 										src="https://source.unsplash.com/30x30/?random"
 										alt=""
-										className="w-10 h-10 bg-gray-500 rounded-full bg-gray-700"
+										className="w-10 h-10 bg-gray-500 rounded-full "
 									/>
 									<button
 										type="button"
