@@ -6,34 +6,38 @@ import Suggestions from "./pages/Suggestions";
 import Contact from "./pages/Contact";
 import App from "./App";
 import Home from "./pages/Home";
+import ListedBooks from "./pages/ListedBooks";
+import PagesToRead from "./pages/PagesToRead";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <App></App>,
-    errorElement: <div>Hello from error</div>,
-    children:[
-      {
-        path: '/',
-        element: <Home></Home>
-      },
-      {
-        path: '/listed-books',
-        element: <div>hello from listed books</div>
-      },
-      {
-        path: '/pages-to-read',
-        element: <div>hello from pages to read</div>
-      },
-      {
-        path: '/suggestions',
-        element: <Suggestions></Suggestions>
-      },
-      {
-        path: '/contact-us',
-        element: <Contact></Contact>
-      }
-    ]
+		// errorElement: <div>Hello from error</div>,
+		children: [
+			{
+				path: "/",
+				loader: () => fetch("./book_data.json"),
+				element: <Home></Home>,
+			},
+			{
+				path: "/listed-books",
+
+				element: <ListedBooks></ListedBooks>,
+			},
+			{
+				path: "/pages-to-read",
+				element: <PagesToRead></PagesToRead>,
+			},
+			{
+				path: "/suggestions",
+				element: <Suggestions></Suggestions>,
+			},
+			{
+				path: "/contact-us",
+				element: <Contact></Contact>,
+			},
+		],
 	},
 ]);
 
