@@ -7,23 +7,57 @@ const ListedBooks = () => {
 	const books = useLoaderData();
 	const [tabIndex, setTabIndex] = useState(0);
 
-	const readId = JSON.parse(localStorage.getItem("read") || '[]');
-	const readBooks = books.filter((book) => {
-		return readId.includes(book.bookId);
-	});
+	const readId = JSON.parse(localStorage.getItem("read") || "[]");
+	const readBooks = books.filter((book) => readId.includes(book.bookId));
 
-	const wishId = JSON.parse(localStorage.getItem("wish") || '[]');
-	const wishBooks = books.filter((book) => {
-		return wishId.includes(book.bookId);
-	});
+	const wishId = JSON.parse(localStorage.getItem("wish") || "[]");
+	const wishBooks = books.filter((book) => wishId.includes(book.bookId));
+
+	const [sortByRead, setSortByRead] = useState("");
+	const [sortedReadBooks, setSortedReadBooks] = useState([]);
+
+	const [sortByWish, setSortByWish] = useState("");
+	const [sortedWishBooks, setSortedWishBooks] = useState([]);
+
+	const handleSort = (event, tab) => {
+		let selectedSortField = "";
+		if (event.target.innerText.toLowerCase() === "rating") {
+			selectedSortField = "rating";
+		} else if (event.target.innerText.toLowerCase() === "number of pages") {
+			selectedSortField = "totalPages";
+		} else if (event.target.innerText.toLowerCase() === "publish year") {
+			selectedSortField = "yearOfPublishing";
+		}
+
+		if (tab === "read") {
+			setSortByRead(selectedSortField);
+
+			const sorted = [...readBooks].sort((a, b) => {
+				if (a[selectedSortField] < b[selectedSortField]) return 1;
+				if (a[selectedSortField] > b[selectedSortField]) return -1;
+				return 0;
+			});
+
+			setSortedReadBooks(sorted);
+		} else if (tab === "wishlist") {
+			setSortByWish(selectedSortField);
+
+			const sorted = [...wishBooks].sort((a, b) => {
+				if (a[selectedSortField] < b[selectedSortField]) return 1;
+				if (a[selectedSortField] > b[selectedSortField]) return -1;
+				return 0;
+			});
+
+			setSortedWishBooks(sorted);
+		}
+	};
 
 	return (
 		<div>
 			<h1 className="max-w-full text-center py-8 text-xl bg-gray-100 my-8 rounded-xl font-bold">
 				Books
 			</h1>
-			{/* Dropdown manu */}
-
+			{/* Dropdown menu */}
 			<div className="dropdown mb-4 items-center justify-center flex flex-col">
 				<div
 					tabIndex={0}
@@ -32,27 +66,68 @@ const ListedBooks = () => {
 				>
 					Sort By <FaAngleDown />
 				</div>
-				<ul
-					tabIndex={0}
-					className="dropdown-content mt-44 z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
-				>
-					<li>
-						<a>Rating</a>
-					</li>
-					<li>
-						<a>Number of Pages</a>
-					</li>
-					<li>
-						<a>Publish Year</a>
-					</li>
-				</ul>
+				{tabIndex === 0 ? (
+					<ul
+						tabIndex={0}
+						className="dropdown-content mt-44 z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+					>
+						<li>
+							<a onClick={(event) => handleSort(event, "read")}>
+								Rating
+							</a>
+						</li>
+						<li>
+							<a onClick={(event) => handleSort(event, "read")}>
+								Number of Pages
+							</a>
+						</li>
+						<li>
+							<a onClick={(event) => handleSort(event, "read")}>
+								Publish Year
+							</a>
+						</li>
+					</ul>
+				) : (
+					<ul
+						tabIndex={1}
+						className="dropdown-content mt-44 z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+					>
+						<li>
+							<a
+								onClick={(event) =>
+									handleSort(event, "wishlist")
+								}
+							>
+								Rating
+							</a>
+						</li>
+						<li>
+							<a
+								onClick={(event) =>
+									handleSort(event, "wishlist")
+								}
+							>
+								Number of Pages
+							</a>
+						</li>
+						<li>
+							<a
+								onClick={(event) =>
+									handleSort(event, "wishlist")
+								}
+							>
+								Publish Year
+							</a>
+						</li>
+					</ul>
+				)}
 			</div>
 
 			{/* tabs */}
 			<div className="border-b mt-4">
 				<div className="flex flex-start overflow-x-auto overflow-y-hidden flex-nowrap ">
 					<Link
-						to={"#"}
+						to="#"
 						onClick={() => setTabIndex(0)}
 						className={`flex items-center border-b-0 flex-shrink-0 px-5 py-3 ${
 							tabIndex === 0 ? "border" : "border-0"
@@ -61,7 +136,7 @@ const ListedBooks = () => {
 						<span>Read Books</span>
 					</Link>
 					<Link
-						to={"#"}
+						to="#"
 						onClick={() => setTabIndex(1)}
 						className={`flex items-center border-b-0 flex-shrink-0 px-5 py-3 ${
 							tabIndex === 1 ? " border" : "border-0"
@@ -73,13 +148,21 @@ const ListedBooks = () => {
 			</div>
 			<div className="mt-4">
 				{tabIndex === 0 &&
-					readBooks.map((book, idx) => (
-						<ListedBook key={idx} book={book}></ListedBook>
-					))}
+					(sortedReadBooks.length > 0
+						? sortedReadBooks.map((book, idx) => (
+								<ListedBook key={idx} book={book}></ListedBook>
+						  ))
+						: readBooks.map((book, idx) => (
+								<ListedBook key={idx} book={book}></ListedBook>
+						  )))}
 				{tabIndex === 1 &&
-					wishBooks.map((book, idx) => (
-						<ListedBook key={idx} book={book}></ListedBook>
-					))}
+					(sortedWishBooks.length > 0
+						? sortedWishBooks.map((book, idx) => (
+								<ListedBook key={idx} book={book}></ListedBook>
+						  ))
+						: wishBooks.map((book, idx) => (
+								<ListedBook key={idx} book={book}></ListedBook>
+						  )))}
 			</div>
 		</div>
 	);
