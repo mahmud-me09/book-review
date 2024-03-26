@@ -9,12 +9,13 @@ import Home from "./pages/Home";
 import ListedBooks from "./pages/ListedBooks";
 import PagesToRead from "./pages/PagesToRead";
 import BookDetail from "./pages/BookDetail";
+import ErrorPage from "./pages/ErrorPage";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <App></App>,
-		// errorElement: <div>Hello from error</div>,
+		errorElement: <ErrorPage></ErrorPage>,
 		children: [
 			{
 				path: "/",
