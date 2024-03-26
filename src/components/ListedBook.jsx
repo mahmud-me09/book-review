@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { CiLocationOn } from "react-icons/ci";
+import { MdPeopleOutline } from "react-icons/md";
+import { RiPagesLine } from "react-icons/ri";
 
 const ListedBook = ({book}) => {
     const navigate = useNavigate();
@@ -13,14 +16,47 @@ const ListedBook = ({book}) => {
 					<img className="w-[130px]" src={book.image} alt="Album" />
 				</figure>
 				<div className="card-body">
-					<h2 className="card-title">New album is released!</h2>
-					<p>Click the button to listen on Spotiwhy app.</p>
-					<div className="card-actions justify-end">
+					<h2 className="card-title">{book.bookName}</h2>
+					<p>By: {book.author}</p>
+					<div className="flex gap-4">
+						<div>
+							<strong>Tags: </strong>
+							{book.tags.map((tag, id) => (
+								<div
+									key={id}
+									className="badge bg-green-50 text-green-500"
+								>
+									{tag}
+								</div>
+							))}
+						</div>
+						<div className="flex justify-center items-center gap-2">
+							<CiLocationOn /> year of Publishing:{" "}
+							{book.yearOfPublishing}
+						</div>
+					</div>
+					<div className="flex gap-4">
+						<div className="flex justify-center items-center gap-2">
+							<MdPeopleOutline /> Publisher: {book.publisher}
+						</div>
+						<div className="flex justify-center items-center gap-2">
+							<RiPagesLine /> Pages: {book.totalPages}
+						</div>
+					</div>
+					<hr/>
+
+					<div className="card-actions justify-start gap-4">
+						<button className="btn p-6 flex flex-col justify-center items-center bg-blue-200 text-blue-500 rounded-full">
+							Category: {book.category}
+						</button>
+						<button className="btn p-6 flex flex-col justify-center items-center bg-orange-200 text-orange-500 rounded-full">
+							Rating: {book.rating}
+						</button>
 						<Link
 							onClick={() => handleClick(book)}
 							to={`/${book.bookId}`}
 						>
-							<button className="btn btn-primary">
+							<button className="btn p-6 flex flex-col justify-center items-center bg-green-500 text-white rounded-full">
 								View Detail
 							</button>
 						</Link>

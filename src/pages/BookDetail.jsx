@@ -55,7 +55,7 @@ const BookDetail = () => {
 	return (
 		<div className="flex flex-col lg:flex-row gap-12 ">
 			<div className="p-10 bg-gray-200 rounded-xl">
-				<img className="mx-auto" width={425} src={book.image} alt="" />
+				<img className="mx-auto w-[425px] h-[425px]" src={book.image} alt="Image not found" />
 			</div>
 			<div>
 				<h1 className="text-2xl font-bold pb-4">{book.bookName}</h1>
