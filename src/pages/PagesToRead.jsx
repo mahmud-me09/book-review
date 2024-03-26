@@ -1,6 +1,14 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
-import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from "recharts";
+import {
+	BarChart,
+	Bar,
+	XAxis,
+	YAxis,
+	ResponsiveContainer,
+	Cell,
+	CartesianGrid,
+} from "recharts";
 
 const PagesToRead = () => {
 	const books = useLoaderData();
@@ -24,6 +32,20 @@ const PagesToRead = () => {
 		);
 	};
 
+	function getRandomColor() {
+		const letters = "0123456789ABCDEF";
+		let color = "#";
+		for (let i = 0; i < 6; i++) {
+			color += letters[Math.floor(Math.random() * 16)];
+		}
+		return color;
+	}
+
+	const readBooksWithColor = readBooks.map((book) => ({
+		...book,
+		color: getRandomColor(),
+	}));
+
 	const renderCustomBarLabel = ({ payload, x, y, width, height, value }) => {
 		return (
 			<text
@@ -37,17 +59,21 @@ const PagesToRead = () => {
 	};
 
 	return (
-		<div>
+		<div className="bg-gray-50 p-16 mb-16 mt-4">
 			<ResponsiveContainer width="100%" height={600}>
-				<BarChart data={readBooks}>
+				<BarChart data={readBooksWithColor}>
+					<CartesianGrid strokeDasharray="3 3" />
 					<XAxis dataKey="bookName" />
 					<YAxis dataKey="totalPages" />
 					<Bar
 						dataKey="totalPages"
-						fill="#8884d8"
 						shape={<TriangleBar />}
 						label={renderCustomBarLabel}
-					/>
+					>
+						{readBooksWithColor.map((entry, index) => (
+							<Cell key={`cell-${index}`} fill={entry.color} />
+						))}
+					</Bar>
 				</BarChart>
 			</ResponsiveContainer>
 		</div>
