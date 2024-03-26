@@ -1,31 +1,29 @@
 import { useLoaderData, useParams } from 'react-router-dom';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BookDetail = () => {
     const {id} = useParams()
     const intId = parseInt(id)
     const bookData = useLoaderData()
-    const book = bookData[intId-1]
-    let readBookId =[]
+    const book = bookData.find((book)=>book.bookId ===intId)
+    const notify = (key) => toast(`Already in the ${key} list`);
 
-    function HandleReadButton(id){
-        let data = localStorage.getItem('read')
-        const dataIds = JSON.parse(data)
-        readBookId.push(id)
-        localStorage.setItem('read',JSON.stringify(readBookId))
-    }
-
-    function setLocalData(key,id){
-        readBook = getLocalData(key)
-        const readBookIds = [...readBook, id];
-         
-        readBookStringified = JSON.stringify(readBookIds)
-        localStorage.setItem(key,readBookStringified)
-    }
-
-    function getLocalData(key){ //key = read, wishlist
-        const data = JSON.parse(localStorage.getItem(key))
-        return data
-    }
+    function HandleButton(key,id){
+		let data = localStorage.getItem(key);
+		let BookId = [];
+		if (data) {
+			BookId = JSON.parse(data);
+		}
+        if(!BookId.find((idx)=> idx===id)){
+            BookId.push(id);
+		    localStorage.setItem(key, JSON.stringify(BookId));
+        }
+        else{
+            notify(key)
+        }
+		
+	}
 
     return (
 		<div className="flex flex-col lg:flex-row gap-12 ">
@@ -88,16 +86,20 @@ const BookDetail = () => {
 				</div>
 				<div className="flex gap-4">
 					<button
-						onClick={() => HandleReadButton(intId)}
+						onClick={() => HandleButton("read", intId)}
 						className="btn bg-white  border border-gray-300 text-black"
 					>
 						Read
 					</button>
-					<button className="btn bg-sky-300  text-white">
+					<button
+						onClick={() => HandleButton("wish", intId)}
+						className="btn bg-sky-300  text-white"
+					>
 						Wishlist
 					</button>
 				</div>
 			</div>
+			<ToastContainer />
 		</div>
 	);
 };
