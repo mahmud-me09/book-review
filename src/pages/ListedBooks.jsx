@@ -13,10 +13,8 @@ const ListedBooks = () => {
 	const wishId = JSON.parse(localStorage.getItem("wish") || "[]");
 	const wishBooks = books.filter((book) => wishId.includes(book.bookId));
 
-	const [sortByRead, setSortByRead] = useState("");
 	const [sortedReadBooks, setSortedReadBooks] = useState([]);
 
-	const [sortByWish, setSortByWish] = useState("");
 	const [sortedWishBooks, setSortedWishBooks] = useState([]);
 
 	const handleSort = (event, tab) => {
@@ -30,7 +28,6 @@ const ListedBooks = () => {
 		}
 
 		if (tab === "read") {
-			setSortByRead(selectedSortField);
 
 			const sorted = [...readBooks].sort((a, b) => {
 				if (a[selectedSortField] < b[selectedSortField]) return 1;
@@ -39,8 +36,8 @@ const ListedBooks = () => {
 			});
 
 			setSortedReadBooks(sorted);
+
 		} else if (tab === "wishlist") {
-			setSortByWish(selectedSortField);
 
 			const sorted = [...wishBooks].sort((a, b) => {
 				if (a[selectedSortField] < b[selectedSortField]) return 1;
