@@ -1,11 +1,10 @@
 import React from 'react';
-
+import { BarChart, Bar, XAxis, YAxis } from 'recharts';
 const PagesToRead = () => {
-    return (
+    return(
         <div>
-            Hello
-        </div>
-    );
-};
 
-export default PagesToRead;
+        </div>
+    )
+}
+export default PagesToRead

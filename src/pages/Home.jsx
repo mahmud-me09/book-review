@@ -5,8 +5,11 @@ import AllBookCards from '../components/AllBookCards';
 
 const Home = () => {
     const books = useLoaderData()
+
+    
+
     return (
-		<div>
+		<div className='pb-40'>
 			<Hero></Hero>
 			<h1 className="text-3xl font-semibold text-center mt-20 mb-10">
 				Books

@@ -1,9 +1,14 @@
 import { FaRegStar } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 
 const BookCard = ({ book }) => {
-	console.log(book);
+    const navigate = useNavigate()
+    function handleClick(selectedBook) {
+        navigate(`/${selectedBook.bookId}`)
+	}
+    
 	return (
-		<div>
+		<Link onClick={()=>handleClick(book)} to = {`/${book.bookId}`}>
 			<div className="card w-full border shadow-xl p-5">
 				<figure className="max-w-[326px] bg-base-200 mx-auto md:px-10 lg:px-20 py-5">
 					<img className="h-[230px]" src={book.image} alt="Shoes" />
@@ -11,8 +16,8 @@ const BookCard = ({ book }) => {
 
 				<div className="card-body">
 					<div className="card-actions justify-start">
-						{book.tags.map((tag) => (
-							<div className="badge bg-green-50 text-green-500">
+						{book.tags.map((tag, id) => (
+							<div key={id} className="badge bg-green-50 text-green-500">
 								{tag}
 							</div>
 						))}
@@ -30,7 +35,7 @@ const BookCard = ({ book }) => {
 					</div>
 				</div>
 			</div>
-		</div>
+		</Link>
 	);
 };
 
