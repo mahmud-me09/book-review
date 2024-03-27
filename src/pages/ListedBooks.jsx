@@ -122,7 +122,7 @@ const ListedBooks = () => {
 
 			{/* tabs */}
 			<div className="border-b mt-4">
-				<div className="flex flex-start overflow-x-auto overflow-y-hidden flex-nowrap ">
+				<div className="flex flex-col lg:flex-row flex-start overflow-x-auto overflow-y-hidden flex-nowrap ">
 					<Link
 						to="#"
 						onClick={() => setTabIndex(0)}

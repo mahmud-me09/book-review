@@ -12,7 +12,7 @@ const Suggestions = () => {
 						<span className="text-center">
 							How was your experience?
 						</span>
-						<div className="flex space-x-3">
+						<div className="flex flex-wrap justify-center space-x-3">
 							<button
 								type="button"
 								title="Rate 1 stars"

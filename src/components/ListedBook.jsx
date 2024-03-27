@@ -12,13 +12,13 @@ const ListedBook = ({book}) => {
     return (
 		<div className="p-4 border rounded-lg my-4">
 			<div className="card lg:card-side bg-base-100">
-				<figure className="px-12 py-6 bg-gray-100 ">
+				<figure className="px-2 lg:px-12 py-6 bg-gray-100 ">
 					<img className="w-[130px]" src={book.image} alt="Album" />
 				</figure>
-				<div className="card-body">
+				<div className="card-body px-0">
 					<h2 className="card-title">{book.bookName}</h2>
 					<p>By: {book.author}</p>
-					<div className="flex gap-4">
+					<div className="flex flex-col lg:flex-row gap-4">
 						<div>
 							<strong>Tags: </strong>
 							{book.tags.map((tag, id) => (
@@ -30,16 +30,16 @@ const ListedBook = ({book}) => {
 								</div>
 							))}
 						</div>
-						<div className="flex justify-center items-center gap-2">
+						<div className="flex lg:justify-center items-center gap-2">
 							<CiLocationOn /> year of Publishing:{" "}
 							{book.yearOfPublishing}
 						</div>
 					</div>
-					<div className="flex gap-4">
-						<div className="flex justify-center items-center gap-2">
+					<div className="flex flex-col lg:flex-row gap-4">
+						<div className="flex lg:justify-center items-center gap-2">
 							<MdPeopleOutline /> Publisher: {book.publisher}
 						</div>
-						<div className="flex justify-center items-center gap-2">
+						<div className="flex lg:justify-center items-center gap-2">
 							<RiPagesLine /> Pages: {book.totalPages}
 						</div>
 					</div>

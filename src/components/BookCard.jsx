@@ -14,7 +14,7 @@ const BookCard = ({ book }) => {
 					<img className="h-[230px]" src={book.image} alt="Shoes" />
 				</figure>
 
-				<div className="card-body">
+				<div className="card-body px-2">
 					<div className="card-actions justify-start">
 						{book.tags.map((tag, id) => (
 							<div key={id} className="badge bg-green-50 text-green-500">
@@ -22,14 +22,14 @@ const BookCard = ({ book }) => {
 							</div>
 						))}
 					</div>
-					<h2 className="card-title font-extrabold">{book.bookName}</h2>
+					<h2 className="card-title font-semibold lg:font-extrabold">{book.bookName}</h2>
 					<p>By: {book.author}</p>
-					<div className="flex justify-between items-center mt-8">
+					<div className="flex flex-col lg:flex-row justify-start lg:justify-between mt-3">
 						<div>
 							<p>{book.category}</p>
 						</div>
-						<div className="flex items-center gap-2">
-							<p>{book.rating}</p>
+						<div className="flex justify-start items-center gap-2">
+							{book.rating}
 							<FaRegStar />
 						</div>
 					</div>
