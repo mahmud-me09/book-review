@@ -121,12 +121,12 @@ const ListedBooks = () => {
 			</div>
 
 			{/* tabs */}
-			<div className="border-b mt-4">
+			<div className="lg:border-b mt-4">
 				<div className="flex flex-col lg:flex-row flex-start overflow-x-auto overflow-y-hidden flex-nowrap ">
 					<Link
 						to="#"
 						onClick={() => setTabIndex(0)}
-						className={`flex items-center border-b-0 flex-shrink-0 px-5 py-3 ${
+						className={`flex items-center lg:border-b-0 flex-shrink-0 px-5 py-3 ${
 							tabIndex === 0 ? "border" : "border-0"
 						} rounded-t-lg `}
 					>
@@ -135,7 +135,7 @@ const ListedBooks = () => {
 					<Link
 						to="#"
 						onClick={() => setTabIndex(1)}
-						className={`flex items-center border-b-0 flex-shrink-0 px-5 py-3 ${
+						className={`flex items-center lg:border-b-0 flex-shrink-0 px-5 py-3 ${
 							tabIndex === 1 ? " border" : "border-0"
 						} rounded-t-lg `}
 					>
