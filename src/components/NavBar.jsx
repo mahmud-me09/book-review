@@ -112,9 +112,9 @@ const NavBar = () => {
 						</div>
 						<ul
 							tabIndex={0}
-							className="menu-sm font-semibold dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+							className="menu-sm font-semibold dropdown-content flex flex-col lg:flex-row gap-2  mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-20 lg:w-56"
 						>
-							<a className="btn bg-green-500 text-white mx-3">
+							<a className="btn bg-green-500 text-white mx-0 lg:mx-3">
 								Sign In
 							</a>
 							<a className="btn bg-sky-300 text-white">Sign Up</a>

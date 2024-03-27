@@ -11,7 +11,7 @@ const ListedBook = ({book}) => {
 	}
     return (
 		<div className="p-4 border rounded-lg my-4">
-			<div className="card lg:card-side bg-base-100">
+			<div className="card lg:card-side gap-4 bg-base-100">
 				<figure className="px-2 lg:px-12 py-6 bg-gray-100 ">
 					<img className="w-[130px]" src={book.image} alt="Album" />
 				</figure>
