@@ -1,5 +1,5 @@
 Name of the website: Book vibe
-Live Link: massive-nut.surge.sh
+<a href="https://massive-nut.surge.sh">Live Link</a>
 
 Features of the website:
 * You can view the most influencial books in the website.
@@ -9,3 +9,9 @@ Features of the website:
 * In the 'pages to read' tab you can see the statistics of how much pages you have already read of the books.
 * Your comments are highly valuable so don't forget to leave your comments on the 'suggestions' tab.
 * Please feel free to contact us if you have any query in the 'contact us' tab.
+
+##To run this project:
+1. Clone the project
+2. run the following command
+   npm install
+   npm run dev
